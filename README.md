@@ -51,7 +51,7 @@ Works similarly to the "[binary search" based method](https://en.wikipedia.org/w
 	ABCD  	CD-- |	CD00
 	ABCD  	CD-- |	D00- |
 ```
-### SSE2 based
+### SSE2 method
 *`Functions with the '_SSE' suffix`*
 
 Work because each row is 8-bits wide so they can be operated on individually using special SIMD instructions.
