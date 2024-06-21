@@ -23,6 +23,8 @@ Time taken to calculate 1 billion results. Input was from an array of random val
 *The `pext` method uses a single BMI2 intrinsic. Not available on older CPUs.*
 | Method | Perf <sub>(m=n)</sub> | Perf <sub>(m=x86-64)</sub> |
 | - | - | - |
+| [Pseudo rot45](https://www.chessprogramming.org/Flipping_Mirroring_and_Rotating#Pseudo-Rotation_by_45_degrees) | 1.20 | 1.22 |
+| Psudo rot45 B | 1.10 | 1.12 |
 | SSE | 0.64 | 0.73 |
 | pext | 0.77 | N/A |
 
