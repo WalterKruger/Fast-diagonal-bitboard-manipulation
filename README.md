@@ -20,7 +20,7 @@ Time taken to calculate 1 billion results. Input was from an array of random val
 | SSE right | 0.73 | 0.62 |
 
 ### Extract diagonal
-*The `pext` method uses a single BIM2 intrinsic. Not available on older CPUs.*
+*The `pext` method uses a single BMI2 intrinsic. Not available on older CPUs.*
 | Method | Perf <sub>(m=n)</sub> | Perf <sub>(m=x86-64)</sub> |
 | - | - | - |
 | SSE | 0.64 | 0.73 |
