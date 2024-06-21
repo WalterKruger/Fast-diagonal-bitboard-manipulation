@@ -40,7 +40,7 @@ ABC    C__
 ### "Binary" method
 *`Functions with the '_bin' suffix`*
 
-Works similarly to the "[binary search" based method](https://en.wikipedia.org/wiki/Find_first_set#CTZ) when calculating the number of leading zeros.
+Works similarly to the "[binary search" based method](https://en.wikipedia.org/wiki/Find_first_set#CTZ) when calculating the number of trailing zeros.
 1. Bytes that are unaffected are saved using a mask
 2. For shifted bytes, only the bits came from that byte are saved
 3. The two parts are combined using a bitwise OR 
