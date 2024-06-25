@@ -3,7 +3,7 @@ Fast methods I came up with for performing bit manipulation on the "diagonals" o
 Two operations are included:
 - A "diagonal shift", where each byte is bit shifted left/right one more/less than the previous.
 - Extracting the "diagonal bits" so they are placed horizontally next to each other.
-- Depositing the bits from a u8 into arbitrary bytes in the bitboard (undo diagonal or vertical extract) 
+- Depositing a bit from a u8 into the bytes from the bitboard (equivalent to undoing a diagonal or vertical extract) 
 
 Could be useful for chess programming when using a classic bitboard.
 E.g. Quickly calculating non-blocked moves for a bishop when used in conjunction with count leading/trailing zeros.
