@@ -3,6 +3,7 @@ Fast methods I came up with for performing bit manipulation on the "diagonals" o
 Two operations are included:
 - A "diagonal shift", where each byte is bit shifted left/right one more/less than the previous.
 - Extracting the "diagonal bits" so they are placed horizontally next to each other.
+- Depositing the bits from a u8 into arbitrary bytes in the bitboard (undo diagonal or vertical extract) 
 
 Could be useful for chess programming when using a classic bitboard.
 E.g. Quickly calculating non-blocked moves for a bishop when used in conjunction with count leading/trailing zeros.
@@ -27,6 +28,22 @@ Time taken to calculate 1 billion results. Input was from an array of random val
 | Psudo rot45 B | 1.10 | 1.12 |
 | SSE | 0.64 | 0.73 |
 | pext | 0.77 | N/A |
+
+### Deposite uint8_t into bitboard
+*The `pdep` method uses a single BMI2 intrinsic. Not available on older CPUs.*
+| Method | Perf <sub>(m=n)</sub> | Perf <sub>(m=x86-64)</sub> |
+| - | - | - |
+| Vertical "Binary" | 1.41 | 1.42 |
+| Vertical Mul. | 0.89 | 0.89 |
+| Vertical clMul. | 0.95 | N/A |
+| Vertical pdep | 0.81 | N/A |
+| Vertical SSE | 0.73 | 0.75 |
+| Diag. back Mul. | 0.75 | 0.75 |
+| Diag. back SSE | 0.56 | 0.60 |
+| Diag. foward Mul. | 1.23 | 1.22 |
+| Diag. back SSE | 0.73 | 0.81 |
+| Diag. back pdep | 0.80 | N/A |
+
 
 ## Diagonal shift
 *File: `diagShift.h`*
