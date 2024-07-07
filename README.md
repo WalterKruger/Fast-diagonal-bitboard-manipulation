@@ -90,7 +90,7 @@ HIJ
 | pext | 0.77 | N/A |
 
 ## Deposit to diagonal 
-### To 'back' (\)
+### To 'back' (\\)
 Effectively just a broadcast to every byte and a mask.
 <details><summary>Visualization</summary>
 
