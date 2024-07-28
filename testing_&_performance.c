@@ -5,8 +5,11 @@
 # include <time.h>      // Performance messuring
 # include <immintrin.h> // Rotation shift
 
+//#define CPU_HAS_BMI2
+
 # include "diagShift.h"
 # include "diagToHorizontal.h"
+# include "horizontalTo64.h"
 
 #define hex2d_as_u64(r7, r6, r5, r4, r3, r2, r1, r0) (0x ## r7 ## r6 ## r5 ## r4 ## r3 ## r2 ## r1 ## r0 ## ULL)
 
@@ -76,9 +79,10 @@ int main() {
     const uint64_t rising =  0x8040201008040201ULL;
     const uint64_t falling = 0x0102040810204080ULL;
 
-    //printf("%llX\n", antiClock_rot45(rising));
-    printf("%llX\n", diagToHorizontal_fwd_SSE(falling));
-    //printf("%llX\n", diagShift_tr_SSE(UINT64_MAX));
+    //printf("0x%llX\n", antiClock_rot45(rising));
+    //printf("0x%llX\n", diagToHorizontal_fwd_SSE(falling));
+    //printf("0x%llX\n", diagShift_tr_SSE(UINT64_MAX));
+    printf("0x%llX\n", diagToHorizontal_fwd_SAD(falling));
 
 
     // Performance messuring
@@ -88,12 +92,12 @@ int main() {
     for (size_t i=0; i < TOTAL_INTS; i++)
         rand_ints[i] = ((uint64_t)rand() << 32) | rand();
 
-
+    
     volatile uint64_t result = 0;
     clock_t start_t = clock();
 
     for (size_t i=0; i< 1000000000LL; i++)
-        result = diagToHorizontal_back_SSE(rand_ints[i % TOTAL_INTS]);
+        result = diagToHorizontal_fwd_SAD(rand_ints[i % TOTAL_INTS]);
 
     clock_t end_t = clock();
 
