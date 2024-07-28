@@ -69,9 +69,10 @@ ABC    C__
 | SSE right | 0.73 | 0.62 |
 
 ## Extract diagonal
-This works very similar to the diagonal shift. The binary method doesn't need to mask on any alignment so it can directly shift the diagonals in the lower 8-bits.
-
 The SSE2 based methods calculates a diagonal shift-to-the-left, and then extract the most significant bits of each 8-bit element using `_mm_movemask_epi8`.
+
+The "SAD" method masks out the diagonal bits and use `_mm_sad_epu8` with zero to effectively bitwise OR between all elements.
+Note: The forward method outputs the result in reverse order.
 <details><summary>Visualization</summary>
 
 ```
@@ -88,6 +89,7 @@ HIJ
 | Psudo rot45 B | 1.10 | 1.12 |
 | SSE | 0.64 | 0.73 |
 | pext | 0.77 | N/A |
+| SAD | 0.55 | 0.55 |
 
 ## Deposit to diagonal 
 ### To 'back' (\\)
@@ -124,6 +126,7 @@ ABC => 0B0
 | pdep | 0.80 | N/A |
 
 
+
 ## Deposit to vertical
 Input bits to a LSB in each byte. Equivalent to 'row to column' or '90deg rotation'.
 <details><summary>Visualization</summary>
@@ -138,8 +141,8 @@ ABC => B00
 *The `pdep` method uses a single BMI2 intrinsic. Not available on older CPUs.*
 | Method | Perf <sub>(m=n)</sub> | Perf <sub>(m=x86-64)</sub> |
 | - | - | - |
-| Vertical "Binary" | 1.41 | 1.42 |
-| Vertical Mul. | 0.89 | 0.89 |
-| Vertical clMul. | 0.95 | N/A |
-| Vertical pdep | 0.81 | N/A |
-| Vertical SSE | 0.73 | 0.75 |
+| "Binary" | 1.41 | 1.42 |
+| Mul. | 0.89 | 0.89 |
+| clMul. | 0.95 | N/A |
+| pdep | 0.81 | N/A |
+| SSE | 0.73 | 0.75 |
