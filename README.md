@@ -68,6 +68,29 @@ ABC    C__
 | SSE left | 0.62 | 0.62 |
 | SSE right | 0.73 | 0.62 |
 
+
+
+## Diagonal transpose
+Also called a diagonal flip.
+
+Note: The delta swap method is trivially vectorizable, so it should be a lot faster if you need to flip multiple bitboards at once.
+<details><summary>Visualization</summary>
+
+```
+HIJ    CFJ
+EDF => BDI
+ABC    AEH
+```
+</details>
+
+| Method | Perf <sub>(m=n)</sub> | Perf <sub>(m=x86-64)</sub> |
+| - | - | - |
+| [3 Delta Swaps](https://www.chessprogramming.org/Flipping_Mirroring_and_Rotating#FlipabouttheDiagonal) | 2.05 | 2.06 |
+| SSE2 | 1.76 | 1.84 |
+| AVX2 | 0.92 | N/A |
+| AVX512 | N/A | N/A |
+
+
 ## Extract diagonal
 The SSE2 based methods calculates a diagonal shift-to-the-left, and then extract the most significant bits of each 8-bit element using `_mm_movemask_epi8`.
 

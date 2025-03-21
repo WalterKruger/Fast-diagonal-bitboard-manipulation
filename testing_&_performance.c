@@ -6,10 +6,12 @@
 # include <immintrin.h> // Rotation shift
 
 //#define CPU_HAS_BMI2
+//#define CPU_HAS_AVX2
 
 # include "diagShift.h"
 # include "diagToHorizontal.h"
 # include "horizontalTo64.h"
+# include "transpose.h"
 
 #define hex2d_as_u64(r7, r6, r5, r4, r3, r2, r1, r0) (0x ## r7 ## r6 ## r5 ## r4 ## r3 ## r2 ## r1 ## r0 ## ULL)
 
@@ -86,7 +88,7 @@ int main() {
 
 
     // Performance messuring
-    const size_t TOTAL_INTS = 20000;
+    enum PERF_SAMPLE {TOTAL_INTS = 20000};
 
     uint64_t rand_ints[TOTAL_INTS];
     for (size_t i=0; i < TOTAL_INTS; i++)
