@@ -77,9 +77,9 @@ Note: The delta swap method is trivially vectorizable, so it should be a lot fas
 <details><summary>Visualization</summary>
 
 ```
-HIJ    CFJ
-EDF => BDI
-ABC    AEH
+GHI    CFI
+DEF => BEH
+ABC    ADG
 ```
 </details>
 
